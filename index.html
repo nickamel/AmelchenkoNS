@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Имя Фамилия – CV</title>
+  <style>
+    /* ====== Base ====== */
+    :root {
+      --accent: #2563eb; /* синий accent */
+      --bg: #f9fafb;
+      --text: #111827;
+      --muted: #6b7280;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ====== Layout ====== */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      color: var(--muted);
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+    }
+    section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    /* Experience / Education list */
+    .item {
+      margin-bottom: 1.5rem;
+    }
+    .item header {
+      text-align: left;
+      margin: 0 0 0.25rem 0;
+    }
+    .item header h3 {
+      font-size: 1.1rem;
+      display: inline;
+    }
+    .item header span {
+      float: right;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .item p {
+      margin-top: 0.25rem;
+    }
+
+    /* Skills tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tag {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .item header span {
+        display: block;
+        float: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ===== Header ===== -->
+    <header>
+      <h1>Имя Фамилия</h1>
+      <p>Титул / Специализация • Город, Страна • <a href="mailto:you@example.com">you@example.com</a></p>
+    </header>
+
+    <!-- ===== About ===== -->
+    <section id="about">
+      <h2>Обо мне</h2>
+      <p>Краткое резюме (3–4 строки) об опыте, ключевых компетенциях и карьерных целях.</p>
+    </section>
+
+    <!-- ===== Experience ===== -->
+    <section id="experience">
+      <h2>Опыт работы</h2>
+      <div class="item">
+        <header>
+          <h3>Должность • Компания</h3>
+          <span>2020 – н.в.</span>
+        </header>
+        <p>Ключевые обязанности, достижения и технологии.</p>
+      </div>
+      <div class="item">
+        <header>
+          <h3>Должность • Компания</h3>
+          <span>2017 – 2020</span>
+        </header>
+        <p>Ключевые обязанности, достижения и технологии.</p>
+      </div>
+    </section>
+
+    <!-- ===== Education ===== -->
+    <section id="education">
+      <h2>Образование</h2>
+      <div class="item">
+        <header>
+          <h3>Название вуза</h3>
+          <span>2012 – 2017</span>
+        </header>
+        <p>Специальность, степень.</p>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section id="skills">
+      <h2>Навыки</h2>
+      <div class="tags">
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section id="projects">
+      <h2>Проекты</h2>
+      <div class="item">
+        <header>
+          <h3><a href="https://github.com/your/project">Название проекта</a></h3>
+          <span>Год</span>
+        </header>
+        <p>Краткое описание и ваша роль.</p>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact">
+      <h2>Контакты</h2>
+      <p>Свяжитесь со мной: <a href="mailto:you@example.com">you@example.com</a> • +7 (900) 000‑00‑00</p>
+    </section>
+  </div>
+</body>
+</html>
