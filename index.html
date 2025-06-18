@@ -103,21 +103,44 @@
         float: none;
       }
     }
+
     .avatar {
-  width: 160px;       /* итоговый размер */
-  height: 160px;
-  object-fit: cover;  /* чтобы лицо не сплющилось */
-  margin-bottom: 1rem;
-  box-shadow: 0 0 8px rgba(0,0,0,0.08); /* лёгкая тень — необязательно */
-}
+      width: 160px;       /* итоговый размер */
+      height: 160px;
+      object-fit: cover;  /* чтобы лицо не сплющилось */
+      margin-bottom: 1rem;
+      box-shadow: 0 0 8px rgba(0,0,0,0.08); /* лёгкая тень — необязательно */
+    }
+
+    /* === Новое: фото слева от текста === */
+    .header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap; /* чтобы на узких экранах элементы переходили вниз */
+    }
+    .header-flex .avatar {
+      margin-bottom: 0; /* убираем отступ снизу, когда фото в ряду */
+    }
+    @media (max-width: 640px) {
+      .header-flex {
+        flex-direction: column; /* на мобильных снова сверху */
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <!-- ===== Header ===== -->
-    <header><img src="avatar.jpg" alt="Фото Имя Фамилия" class="avatar">
-      <h1>Амельченко Николай Сергеевич</h1>
-      <p>Врач-анестезиолог-реаниматолог • Москва, Российская Федерация • <a href="mailto:nickamel@tut.by">nickamel@tut.by</a></p>
+    <header>
+      <div class="header-flex">
+        <img src="avatar.jpg" alt="Фото Имя Фамилия" class="avatar">
+        <div class="header-info">
+          <h1>Амельченко Николай Сергеевич</h1>
+          <p>Врач-анестезиолог-реаниматолог • Москва, Российская Федерация • <a href="mailto:nickamel@tut.by">nickamel@tut.by</a></p>
+        </div>
+      </div>
     </header>
 
     <!-- ===== About ===== -->
@@ -148,9 +171,7 @@
           <h3>Врач-анестезиолог-реаниматолог • 5-ая городская клиническая больница г. Минск</h3>
           <span>Август 2020 — Июль 2024</span>
         </header>
-        <p>Экстренные и плановые анестезиологические пособия пациентам различной
-степени тяжести. Интенсивная терапия в ОАиР общего
-профиля.</p>
+        <p>Экстренные и плановые анестезиологические пособия пациентам различной степени тяжести. Интенсивная терапия в ОАиР общего профиля.</p>
       </div>
       <div class="item">
         <header>
