@@ -103,12 +103,20 @@
         float: none;
       }
     }
+    .avatar {
+  width: 160px;       /* итоговый размер */
+  height: 160px;
+  object-fit: cover;  /* чтобы лицо не сплющилось */
+  border-radius: 50%; /* делает кружок */
+  margin-bottom: 1rem;
+  box-shadow: 0 0 8px rgba(0,0,0,0.08); /* лёгкая тень — необязательно */
+}
   </style>
 </head>
 <body>
   <div class="container">
     <!-- ===== Header ===== -->
-    <header>
+    <header><img src="avatar.jpg" alt="Фото Имя Фамилия" class="avatar">
       <h1>Амельченко Николай Сергеевич</h1>
       <p>Врач-анестезиолог-реаниматолог • Москва, Российская Федерация • <a href="mailto:nickamel@tut.by">nickamel@tut.by</a></p>
     </header>
