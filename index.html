@@ -3,140 +3,194 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Имя Фамилия – CV</title>
+  <title>Амельченко Николай Сергеевич – CV</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- AOS Animation -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <style>
-    /* ====== Base ====== */
+    /* ===== Colors & Typography ===== */
     :root {
-      --accent: #2563eb; /* синий accent */
-      --bg: #f9fafb;
-      --text: #111827;
+      --accent: #2563eb;
+      --bg: #f4f6f8;
+      --card-bg: #ffffff;
+      --text: #1f2937;
       --muted: #6b7280;
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root[data-theme="dark"] {
+      --bg: #121212;
+      --card-bg: #1e1e1e;
+      --text: #e0e0e0;
+      --muted: #a0a0a0;
     }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      padding-top: 60px; /* чтобы содержимое не скрывалось под шапкой */
     }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    /* ====== Layout ====== */
+    /* ===== Layout ===== */
     .container {
-      max-width: 960px;
+      max-width: 800px;
       margin: 0 auto;
-      padding: 2rem 1rem;
+      padding: 0 1rem;
     }
+    nav.navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: var(--card-bg);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .navbar .container {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 1rem;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex; gap: 1rem;
+    }
+    .nav-links a {
+      padding: 0.5rem; font-weight: 500;
+    }
+    .nav-links a.active {
+      border-bottom: 2px solid var(--accent);
+    }
+    .theme-toggle {
+      background: none; border: none; cursor: pointer;
+      padding: 0.25rem; display: flex; align-items: center;
+    }
+    .theme-toggle i { width: 24px; height: 24px; }
 
     header {
-      text-align: center;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       margin-bottom: 2rem;
     }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+    .header-flex {
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
     }
-    header p {
-      color: var(--muted);
+    .avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%; object-fit: cover;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      transition: transform .3s ease;
     }
+    .avatar:hover { transform: scale(1.05); }
+    .header-info h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;
+    }
+    .header-info p { font-size: 0.95rem; color: var(--muted); }
 
     section {
-      margin-bottom: 2.5rem;
-    }
-    section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
-
-    /* Experience / Education list */
-    .item {
+      background: var(--card-bg);
+      padding: 1.5rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
     }
-    .item header {
-      text-align: left;
-      margin: 0 0 0.25rem 0;
+    section[data-aos] { opacity: 0; }
+    section h2 {
+      font-size: 1.5rem; font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      position: relative;
     }
-    .item header h3 {
-      font-size: 1.1rem;
-      display: inline;
-    }
-    .item header span {
-      float: right;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .item p {
-      margin-top: 0.25rem;
+    section h2::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%; transform: translateY(-50%);
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
     }
 
-    /* Skills tags */
+    .item {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .item header {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap;
+    }
+    .item header h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .item header span { font-size: 0.9rem; color: var(--muted); }
+    .item p { margin-top: 0.5rem; font-size: 0.95rem; }
+
     .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 0.75rem;
     }
     .tag {
-      background: var(--accent);
-      color: #fff;
-      padding: 0.3rem 0.6rem;
+      background: var(--accent); color: #fff;
+      padding: 0.6rem 0.8rem;
       border-radius: 999px;
       font-size: 0.85rem;
+      text-align: center;
+      transition: background .3s ease;
+    }
+    .tag:hover { filter: brightness(0.9); }
+
+    .contact-info a {
+      display: inline-flex; align-items: center; gap: 0.5rem;
     }
 
-    /* Responsive tweaks */
-    @media (max-width: 640px) {
-      header h1 {
-        font-size: 2rem;
-      }
-      .item header span {
-        display: block;
-        float: none;
-      }
+    @media (max-width: 600px) {
+      .header-flex { flex-direction: column; text-align: center; }
+      .item header { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+      nav.navbar .container { flex-direction: column; gap: 0.5rem; }
     }
 
-    .avatar {
-      width: 150px;       /* итоговый размер */
-      height: 150px;
-      object-fit: cover;  /* чтобы лицо не сплющилось */
-      border-radius: 50%; /* делает кружок */
-      margin-bottom: 1rem;
-      box-shadow: 0 0 8px rgba(0,0,0,0.08); /* лёгкая тень — необязательно */
-    }
-
-    /* === Новое: фото слева от текста === */
-    .header-flex {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap; /* чтобы на узких экранах элементы переходили вниз */
-    }
-    .header-flex .avatar {
-      margin-bottom: 0; /* убираем отступ снизу, когда фото в ряду */
-    }
-    @media (max-width: 640px) {
-      .header-flex {
-        flex-direction: column; /* на мобильных снова сверху */
-      }
+    @media print {
+      nav, .theme-toggle { display: none !important; }
+      body { padding-top: 0; background: none; }
+      section, header { box-shadow: none; background: none; }
     }
   </style>
 </head>
 <body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <ul class="nav-links">
+        <li><a href="#about">Обо мне</a></li>
+        <li><a href="#experience">Опыт</a></li>
+        <li><a href="#education">Образование</a></li>
+        <li><a href="#skills">Навыки</a></li>
+        <li><a href="#projects">Курсы</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Переключить тему" onclick="toggleTheme()">
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </nav>
+
   <div class="container">
-    <!-- ===== Header ===== -->
+    <!-- Header -->
     <header>
-      <div class="header-flex">
-        <img src="avatar.jpg" alt="Фото Имя Фамилия" class="avatar">
+      <div class="header-flex" data-aos="fade-down">
+        <img src="avatar.jpg" alt="Фото Амельченко Николай Сергеевич" class="avatar">
         <div class="header-info">
           <h1>Амельченко Николай Сергеевич</h1>
           <p>Врач-анестезиолог-реаниматолог • Москва, Российская Федерация • <a href="mailto:nickamel@tut.by">nickamel@tut.by</a></p>
@@ -144,22 +198,24 @@
       </div>
     </header>
 
-    <!-- ===== About ===== -->
-    <section id="about">
+    <!-- About -->
+    <section id="about" data-aos="fade-up">
       <h2>Обо мне</h2>
-      <p>Врач-анестезиолог-реаниматолог с 5-летним стажем работы в крупных многопрофильных стационарах г. Минска и г. Москвы. Второй квалификационная категория. Опыт работы в ОРИТ общего, нейрохирургического и профиля сочетанной травмы, обеспечение ансетизиологических пособий при плановых и экстренных вмешательствах в эндоскопии, абдоминальной, сердечно-сосудистой и гнойной хирургии.  </p>
+      <p>Врач-анестезиолог-реаниматолог с 5-летним стажем работы в крупных многопрофильных стационарах г. Минска и г. Москвы. Второй квалификационная категория. Опыт работы в ОРИТ общего, нейрохирургического и профиля сочетанной травмы, обеспечение ансетизиологических пособий при плановых и экстренных вмешательствах в эндоскопии, абдоминальной, сердечно-сосудистой и гнойной хирургии. </p>
     </section>
 
-    <!-- ===== Experience ===== -->
-    <section id="experience">
+    <!-- Experience -->
+    <section id="experience" data-aos="fade-up">
       <h2>Опыт работы</h2>
+
       <div class="item">
         <header>
-          <h3>Врач-анестезиолог-реаниматолог • ГБУЗ ГКБ № 29 им.Н.Э. Баумана</h3>
+          <h3>Врач-анестезиолог-реаниматолог • ГБУЗ ГКБ № 29 им. Н.Э. Баумана</h3>
           <span>Сентябрь 2024 — сейчас</span>
         </header>
-        <p>Оказание помощи по профилю "Анестезиология и реанимация" на основе принципов доказательной медицины и клинических рекомендаций МЗ РФ в ОРИТ общего профиля.</p>
+        <p>Оказание помощи по профилю "Анестезиология и реанимация" согласно стандартам и клиническим рекомендациям МЗ РФ в ОРИТ общего профиля.</p>
       </div>
+
       <div class="item">
         <header>
           <h3>Врач-анестезиолог-реаниматолог • Городская клиническая больница скорой медицинской помощи г. Минск</h3>
@@ -167,13 +223,15 @@
         </header>
         <p>Интенсивная терапия критических состояний пациентам нейрохирургического профиля и при сочетанной травме.</p>
       </div>
+
       <div class="item">
         <header>
-          <h3>Врач-анестезиолог-реаниматолог • 5-ая городская клиническая больница г. Минск</h3>
-          <span>Август 2020 — Июль 2024</span>
+          <h3>Врач-анестезиолог-реаниматолог • Белорусский государственный медицинский университет</h3>
+          <span>Июнь 2019 — Ноябрь 2021</span>
         </header>
-        <p>Экстренные и плановые анестезиологические пособия пациентам различной степени тяжести. Интенсивная терапия в ОАиР общего профиля.</p>
+        <p>Организация и проведение анестезиологических пособий при плановых хирургических вмешательствах (TIVA, ингаляционная анестезия, нейроаксиальная, проводниковая) в многопрофильных клиниках.</p>
       </div>
+
       <div class="item">
         <header>
           <h3>Медицинский брат (выездная бригада) • Витебская городская станция скорой и неотложной медицинской помощи</h3>
@@ -181,17 +239,18 @@
         </header>
         <p>Оказание экстренной и неотложной помощи на догоспитальном этапе.</p>
       </div>
+
       <div class="item">
         <header>
-          <h3>Санитар выезднаой бригады • Витебская городская станция скорой и неотложной медицинской помощи</h3>
+          <h3>Санитар выездной бригады • Витебская городская станция скорой и неотложной медицинской помощи</h3>
           <span>Июль 2015 — Февраль 2018</span>
         </header>
         <p>Содействие врачу и фельдшеру, безопасная транспортировка пациентов.</p>
       </div>
     </section>
 
-    <!-- ===== Education ===== -->
-    <section id="education">
+    <!-- Education -->
+    <section id="education" data-aos="fade-up">
       <h2>Образование</h2>
       <div class="item">
         <header>
@@ -202,13 +261,13 @@
       </div>
     </section>
 
-    <!-- ===== Skills ===== -->
-    <section id="skills">
+    <!-- Skills -->
+    <section id="skills" data-aos="fade-up">
       <h2>Навыки</h2>
       <div class="tags">
         <span class="tag">Предоперационная оценка риска</span>
-        <span class="tag">Планирование и проведение общей, регионарной и комбинированной анестезии (TIVA, ингаляционная, нейроаксиальная, проводниковая)</span>
-        <span class="tag">Обеспечение проходимости дыхательных путей: прямая/видеоларингоскопия, LMA, сложные дыхательные пути</span>
+        <span class="tag">Планирование и проведение общей, регионарной и нейроаксиальной анестезии (TIVA, ингаляционная, нейроаксиальная, проводниковая)</span>
+        <span class="tag">Обеспечение проходимости дыхательных путей (прямая/видеоларингоскопия, LMA, сложные дыхательные пути)</span>
         <span class="tag">Катетеризация периферических и центральных вен, артерий, эпидурального пространства</span>
         <span class="tag">Ультразвуковая регионарная анестезия</span>
         <span class="tag">Ведение ИВЛ и всех режимов респираторной поддержки</span>
@@ -217,17 +276,18 @@
         <span class="tag">Интенсивная терапия критических состояний</span>
         <span class="tag">Point-of-care ultrasound</span>
         <span class="tag">Работа в мультидисциплинарной команде</span>
-         <span class="tag">Обучение и менторство ординаторов, симуляционный тренинг</span>
-         <span class="tag">Эмпатичная коммуникация с пациентами и родственниками, ведение информированного согласия</span>
-         <span class="tag">Стрессоустойчивость и быстрое принятие решений</span>
-         <span class="tag">Самоорганизация</span>
+        <span class="tag">Обучение и менторство ординаторов, симуляционный тренинг</span>
+        <span class="tag">Эмпатичная коммуникация с пациентами и родственниками, ведение информированного согласия</span>
+        <span class="tag">Стрессоустойчивость и быстрое принятие решений</span>
+        <span class="tag">Самоорганизация</span>
         <span class="tag">Точность и внимательность</span>
       </div>
     </section>
 
-    <!-- ===== Projects ===== -->
-    <section id="projects">
+    <!-- Projects -->
+    <section id="projects" data-aos="fade-up">
       <h2>Повышение квалификации, курсы</h2>
+
       <div class="item">
         <header>
           <h3><a href="https://github.com/your/project">Современные технологии в анестезиологии</a></h3>
@@ -235,69 +295,82 @@
         </header>
         <p>Белорусская медицинская академия последипломного образования</p>
       </div>
-        <div class="item">
+
+      <div class="item">
         <header>
           <h3><a href="https://github.com/your/project">Вторая квалификационная категория</a></h3>
           <span>2022</span>
         </header>
         <p>Комитет здравоохранения Мингорисполкома</p>
       </div>
+
       <div class="item">
-        <header>
-          <h3><a href="https://github.com/your/project">Форум анестезиологов и реаниматологов России (ФАРР-2024)</a></h3>
-          <span>2024</span>
-        </header>
-        <p>Федерация анестезиологов и реаниматологов</p>
-      </div>
-      <div class="item">
-        <header>
-          <h3><a href="https://github.com/your/project">Профессиональная переподготовка "Ультразвуковая диагностика"</a></h3>
-          <span>2024</span>
-        </header>
-        <p>Общество с ограниченной ответственностью "ЭКСПРОМЕД"</p>
-      </div>
-      <div class="item">
-        <header>
-          <h3><a href="https://github.com/your/project">Военно-полевая хирургия: особенности организации и оказания медицинской помощи в условиях вооруженных конфликтов и чрезвычайных ситуаций мирного времени</a></h3>
-          <span>2024</span>
-        </header>
-        <p>Белорусский государственный медицинский университет</p>
-      </div>
-         <div class="item">
-        <header>
-          <h3><a href="https://github.com/your/project">Расширенная сердечно-легочная реанимация</a></h3>
-          <span>2024</span>
-        </header>
-        <p>ГБУ «МЦАиПР»</p>
-      </div>
-         <div class="item">
         <header>
           <h3><a href="https://github.com/your/project">Трудные дыхательные пути</a></h3>
-          <span>2024</span>
+          <span>2023</span>
         </header>
-        <p>ГБУ «МЦАиПР»</p>
+        <p>Центр анестезиологии и реаниматологии БГМУ</p>
       </div>
-       <div class="item">
+
+      <div class="item">
         <header>
           <h3><a href="https://github.com/your/project">Практическая трансфузиология</a></h3>
           <span>2024</span>
         </header>
-        <p>Медицинский симуляционный центр Боткиноской больницы</p>
+        <p>Медицинский симуляционный центр Боткинской больницы</p>
       </div>
-     <div class="item">
+
+      <div class="item">
         <header>
-          <h3><a href="https://github.com/your/project">Регионарная анестезия под контролем ультразвуковой навигации. Практический курс с использованием биологического материала</a></h3>
+          <h3><a href="https://github.com/your/project">Регионарная анестезия: практический курс с использованием биологического материала</a></h3>
           <span>2025</span>
         </header>
-        <p>ГБУЗ "ГКБ №67 им. Л.А. Ворохобова ДЗМ"</p>
+        <p>ГБУЗ "ГКБ № 67 им. Л.А. Ворохобова" ДЗМ</p>
       </div>
     </section>
 
-    <!-- ===== Contact ===== -->
-    <section id="contact">
+    <!-- Contact -->
+    <section id="contact" data-aos="fade-up">
       <h2>Контакты</h2>
-      <p> <a href="mailto:nickamel@tut.by">nickamel@tut.by</a> • +7 (910) 409‑96‑76</p>
+      <p class="contact-info">
+        <i data-lucide="mail"></i><a href="mailto:nickamel@tut.by">nickamel@tut.by</a> • <i data-lucide="phone"></i>+7 (910) 409-96-76
+      </p>
     </section>
   </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide/dist/lucide.js"></script>
+  <script>
+    AOS.init({ duration: 600, once: true });
+    lucide.replace();
+    function toggleTheme() {
+      const root = document.documentElement;
+      if (root.getAttribute('data-theme') === 'dark') {
+        root.removeAttribute('data-theme');
+        localStorage.removeItem('theme');
+      } else {
+        root.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      const links = document.querySelectorAll('.nav-links a');
+      const sections = document.querySelectorAll('section');
+      window.addEventListener('scroll', () => {
+        let fromTop = window.scrollY + 80;
+        sections.forEach(section => {
+          if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+            links.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector(`.nav-links a[href="#${section.id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
